@@ -12,7 +12,7 @@ class Channel:
         self.youtube = Channel.get_service()
         self.id = channel_id
         self.channel_dict = self.url = self.title = self.description =\
-            self.subscriberCount = self.videoCount = self.viewCount = None
+            self.subscriber_count = self.video_Count = self.view_count = None
         self.__get_channel_info()
 
     @property
@@ -24,33 +24,33 @@ class Channel:
         self.url = "https://www.youtube.com/channel/" + self.channel_id
         self.title = self.channel_dict["items"][0]["snippet"]["title"]
         self.description = self.channel_dict["items"][0]["snippet"]["description"]
-        self.subscriberCount = int(self.channel_dict["items"][0]["statistics"]["subscriberCount"])
-        self.videoCount = int(self.channel_dict["items"][0]["statistics"]["videoCount"])
-        self.viewCount = int(self.channel_dict["items"][0]["statistics"]["viewCount"])
+        self.subscriber_count = int(self.channel_dict["items"][0]["statistics"]["subscriberCount"])
+        self.video_count = int(self.channel_dict["items"][0]["statistics"]["videoCount"])
+        self.view_count = int(self.channel_dict["items"][0]["statistics"]["viewCount"])
 
     def __str__(self):
         return f'{self.title} ({self.url})'
 
     def __add__(self, other):
-        return self.subscriberCount + other.subscriberCount
+        return self.subscriber_count + other.subscriber_count
 
     def __sub__(self, other):
-        return self.subscriberCount - other.subscriberCount
+        return self.subscriber_count - other.subscriber_count
 
     def __gt__(self, other):
-        return self.subscriberCount > other.subscriberCount
+        return self.subscriber_count > other.subscriber_count
 
     def __ge__(self, other):
-        return self.subscriberCount >= other.subscriberCount
+        return self.subscriber_count >= other.subscriber_count
 
     def __lt__(self, other):
-        return self.subscriberCount < other.subscriberCount
+        return self.subscriber_count < other.subscriber_count
 
     def __le__(self, other):
-        return self.subscriberCount <= other.subscriberCount
+        return self.subscriber_count <= other.subscriber_count
 
     def __eq__(self, other):
-        return self.subscriberCount == other.subscriberCount
+        return self.subscriber_count == other.subscriber_count
 
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""

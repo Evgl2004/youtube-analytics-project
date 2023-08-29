@@ -8,8 +8,11 @@ class Video:
     def __init__(self, video_id):
         self.youtube = self.__class__.get_service()
         self.id = video_id
-        self.channel_dict = self.url = self.title = self.description = self.likeCount = self.viewCount = None
-        self.__get_video_info()
+        self.video_dict = self.url = self.title = self.description = self.like_count = self.view_count = None
+        try:
+            self.__get_video_info()
+        except IndexError:
+            self.youtube = self.video_dict = self.url = None
 
     @property
     def video_id(self):
@@ -20,8 +23,8 @@ class Video:
         self.url = "https://www.youtube.com/video/" + self.video_id
         self.title = self.video_dict["items"][0]["snippet"]["title"]
         self.description = self.video_dict["items"][0]["snippet"]["description"]
-        self.likeCount = int(self.video_dict["items"][0]["statistics"]["likeCount"])
-        self.viewCount = int(self.video_dict["items"][0]["statistics"]["viewCount"])
+        self.like_count = int(self.video_dict["items"][0]["statistics"]["likeCount"])
+        self.view_count = int(self.video_dict["items"][0]["statistics"]["viewCount"])
 
     def __str__(self):
         return self.title
